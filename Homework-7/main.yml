@@ -1,0 +1,23 @@
+- hosts: all
+  become: yes
+  tasks:
+  - name: Install httpd 
+    ansible.builtin.dnf:
+      name: httpd
+      state: latest
+      update_cache: yes
+
+  - name: Start httpd
+    ansible.builtin.service:
+      name: httpd
+      state: started
+      enabled: yes
+
+  - name: Create users
+    ansible.builtin.user:
+      name: "{{ item }}"
+    loop:
+    - jenny
+    - rose
+    - jisoo
+    - lisa
